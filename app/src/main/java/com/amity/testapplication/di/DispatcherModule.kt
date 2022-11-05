@@ -1,11 +1,10 @@
 package com.amity.testapplication.di
 
+import com.amity.testapplication.core.network.DispatcherProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
@@ -14,7 +13,7 @@ object DispatcherModule {
 
     @Provides
     @Singleton
-    fun provideIODispatcher(): CoroutineDispatcher {
-        return Dispatchers.IO
+    fun provideIODispatcher(): DispatcherProvider {
+        return DispatcherProvider()
     }
 }

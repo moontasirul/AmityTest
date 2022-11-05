@@ -10,8 +10,8 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "todo_model")
 data class ToDoModel(
     @PrimaryKey
-    val completed: Boolean?,
     val id: Int?,
+    val completed: Boolean?,
     val title: String?,
     val userId: Int?
 ) : Parcelable

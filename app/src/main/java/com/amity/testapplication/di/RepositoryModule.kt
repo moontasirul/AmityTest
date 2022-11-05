@@ -1,16 +1,15 @@
 package jp.com.atom.jrfbilling.newDesign.di
 
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
+import com.amity.testapplication.core.network.DispatcherProvider
+import com.amity.testapplication.data.local.db.AppDataBase
 import com.amity.testapplication.data.remote.IAPIService
 import com.amity.testapplication.data.repository.MainRepositoryImpl
-import com.amity.testapplication.domain.MainRepository
+import com.amity.testapplication.domain.IMainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @Module
@@ -21,14 +20,9 @@ object RepositoryModule {
     @Singleton
     fun provideMainRepository(
         apiService: IAPIService,
-        dispatcher: CoroutineDispatcher
-    ): MainRepository {
-        return MainRepositoryImpl(apiService, dispatcher)
+        dispatcher: DispatcherProvider,
+        appDataBase: AppDataBase
+    ): IMainRepository {
+        return MainRepositoryImpl(apiService, dispatcher, appDataBase)
     }
-
-
-//    @Singleton
-//    @Provides
-//    fun provideAuthentication():Authentication {
-//    }
 }

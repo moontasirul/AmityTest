@@ -5,5 +5,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class ToDoItemViewModel(item: ToDoModel) {
     var title = MutableStateFlow(item.title)
-    var status = MutableStateFlow(item.completed)
+    var status = MutableStateFlow(
+        if (item.completed == true) {
+            "Completed"
+        } else {
+            "Not Yet"
+        }
+    )
 }
