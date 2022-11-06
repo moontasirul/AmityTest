@@ -19,7 +19,7 @@ object PersistenceModule {
         application: Application,
     ): AppDataBase {
         return Room
-            .databaseBuilder(application, AppDataBase::class.java, "Photo.db")
+            .databaseBuilder(application, AppDataBase::class.java, "todo.db")
             .fallbackToDestructiveMigration()
             .build()
     }

@@ -7,6 +7,9 @@ import androidx.room.Query
 import com.amity.testapplication.data.model.local.ToDoModel
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * All local db dao function
+ */
 @Dao
 interface ToDoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

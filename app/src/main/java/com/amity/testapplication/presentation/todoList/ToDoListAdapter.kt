@@ -17,6 +17,7 @@ class ToDoListAdapter : RecyclerView.Adapter<ToDoListAdapter.ToDoItemViewHolder>
         private val mBinding: LayoutItemTodoBinding = binding
         private lateinit var mItemViewModel: ToDoItemViewModel
 
+        // bind all item in UI using viewModel
         fun onBind(position: Int) {
             val mToDoItem: ToDoModel = toDoList[position]
             mItemViewModel = ToDoItemViewModel(mToDoItem)

@@ -1,4 +1,4 @@
-package jp.com.atom.jrfbilling.newDesign.di
+package com.amity.testapplication.di
 
 
 import com.amity.testapplication.core.network.DispatcherProvider

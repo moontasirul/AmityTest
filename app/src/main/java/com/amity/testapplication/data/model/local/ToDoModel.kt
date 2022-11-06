@@ -6,6 +6,9 @@ import androidx.room.PrimaryKey
 import com.amity.testapplication.data.model.remote.ToDoListResponseItem
 import kotlinx.parcelize.Parcelize
 
+/**
+ * local to do model class
+ */
 @Parcelize
 @Entity(tableName = "todo_model")
 data class ToDoModel(
@@ -17,6 +20,10 @@ data class ToDoModel(
 ) : Parcelable
 
 
+/**
+ * Extension function from Remote item
+ * return to local todoModel
+ */
 fun ToDoListResponseItem.toDoModel(): ToDoModel {
     return ToDoModel(
         id = id,

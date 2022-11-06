@@ -10,17 +10,28 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 open class MainViewModel @Inject constructor(private val getTodoUseCase: GetTodoUseCase) :
     ViewModel() {
+
+    /**
+     * invoke navigator
+     */
     private lateinit var mNavigator: IMainNavigator
+
+    /**
+     * invoke To-Do list
+     */
+    var toDoResponse = MutableStateFlow(listOf<ToDoModel>())
+
 
     /**
      * Get Navigator
      */
-    protected val navigator: IMainNavigator
+    private val navigator: IMainNavigator
         get() {
             return mNavigator
         }
@@ -32,20 +43,24 @@ open class MainViewModel @Inject constructor(private val getTodoUseCase: GetTodo
         this.mNavigator = navigator
     }
 
+    /**
+     * invoke loader when data fetch
+     */
     private val _isLoading = MutableStateFlow(true)
     val isLoadings = _isLoading.asStateFlow()
 
-    var toDoResponse = MutableStateFlow(listOf<ToDoModel>())
 
-    fun getData() {
+    /**
+     * try to fetch to do list data and update UI
+     */
+    fun fetchToDoData() {
         viewModelScope.launch {
             getTodoUseCase().collectLatest { response ->
                 when (response) {
                     is Resource.Success -> {
                         _isLoading.value = false
-                        val todoList = response.data
-                        if (todoList != null) {
-                            toDoResponse.value = todoList
+                        response.data?.let {
+                            toDoResponse.value = it
                             navigator.updateUIWithToDo()
                         }
                     }
@@ -54,8 +69,7 @@ open class MainViewModel @Inject constructor(private val getTodoUseCase: GetTodo
                     }
                     is Resource.Error -> {
                         _isLoading.value = false
-                        val errorMessage = response.error?.localizedMessage
-
+                        response.error?.localizedMessage?.let { navigator.onOpenError(it) }
                     }
                 }
             }
