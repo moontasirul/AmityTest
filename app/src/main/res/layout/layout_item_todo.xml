@@ -62,8 +62,9 @@
                 android:paddingBottom="@dimen/_8sdp"
                 android:text="@={toDoViewModel.status}"
                 android:textAlignment="viewEnd"
-                android:textColor="@color/purple_700"
+                android:textColor="@{toDoViewModel.taskStatus?@color/purple_700:@color/red}"
                 android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

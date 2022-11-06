@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.amity.testapplication.core.initializer.TimberInitializer
 import com.amity.testapplication.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

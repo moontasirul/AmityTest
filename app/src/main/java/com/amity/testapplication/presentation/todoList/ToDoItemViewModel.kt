@@ -15,4 +15,7 @@ class ToDoItemViewModel(item: ToDoModel) {
     var status = MutableStateFlow(
         if (item.completed == true) "Completed" else "Not Yet"
     )
+
+    // to-do item status weather it is completed or not
+    var taskStatus = MutableStateFlow(item.completed)
 }
